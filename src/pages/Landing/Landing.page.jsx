@@ -1,9 +1,12 @@
 import React from 'react';
+import Header from '../../components/Header';
 
 function LandingPage() {
   return (
     <div>
-      <h1>This is the landing page</h1>
+      <Header />
+      <br />
+      <h3>Welcome to Wizeline Bootcamp</h3>
       <p>All Videos will be displayed here</p>
       <p>Click on one video will redirect to Theatre page.</p>
     </div>

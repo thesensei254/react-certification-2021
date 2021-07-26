@@ -27,10 +27,10 @@ body {
     #7ac5d8 100%
   );
   background-size: 400% 400%;
-  background-position: var(--bg-position);
+  /* background-position: var(--bg-position);
   transition: background-position 2s ease;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
 }
 
 .separator::before {
