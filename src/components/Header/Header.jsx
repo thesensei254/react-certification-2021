@@ -64,18 +64,18 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
   const classes = useStyles();
+
   const [state, setState] = React.useState({
     checked: true,
   });
 
+  // TODO: Fix this function after learning about hooks state
   const handleSwitchChange = (e) => {
-    console.log('Handle switch working');
     setState({ ...state, [e.target.name]: e.target.checked });
   };
 
-  const handleAccountClick = () => {
-    console.log('Account is clicked!');
-  };
+  // TODO: Fix this after learning about state hooks
+  const handleAccountClick = () => {};
 
   return (
     <div className={classes.root}>
