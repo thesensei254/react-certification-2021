@@ -1,0 +1,10 @@
+### Answer the following Questions first:
+
+1. Using create-react-app, what do we need to set up for testing?
+    Setup configurations for jest testing environment. This will depend on the type of tests that we would like to do whether unit or integration
+2. What components are worth to test in your development?
+    - Components that handle some logic on the front end
+    - Components with user events such as user actions and action creators
+    - Components that have sensitive data flows that can break your app
+3. Can you apply TDD once you already created components?
+    - Yes. You can use TDD if part of your originally written code is failing. Create a hypothesis of the outcome, match the requirement then write the test then create the functionality.

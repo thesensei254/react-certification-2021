@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 
 function LandingPage() {
   const classes = useStyles();
+  const [videos, setVideos] = useState(exampleVideoData);
 
   return (
     <div>
@@ -37,7 +38,7 @@ function LandingPage() {
           alignItems="flex-start"
           spacing={3}
         >
-          {exampleVideoData.items.map((item) => (
+          {videos.items.map((item) => (
             <Grid item xs={12} sm={3} key={item.etag}>
               <CardItem
                 imageUrl={item.snippet.thumbnails.high.url}
