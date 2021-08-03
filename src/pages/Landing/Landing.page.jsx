@@ -34,20 +34,20 @@ function LandingPage() {
     setState({
       isClicked: true,
       videos: exampleVideoData.items,
-      video: exampleVideoData.items[0],
+      video: exampleVideoData.items[1],
     });
   };
 
   const handleVideoListItemClick = (currentVideo) => {
-    console.log('Video Object', video);
+    console.log('This function fires');
     setState({
       video: currentVideo,
+      isClicked: true,
+      videos,
     });
   };
 
   const { videos, video, isClicked } = state;
-
-  console.log('This is state videos', videos);
 
   return (
     <div>
