@@ -1,15 +1,18 @@
 import React from 'react';
+import { Grid } from '@material-ui/core';
 import VideoList from '../../components/VideoList';
 import VideoPlayer from '../../components/VideoPlayer';
 
-function TheatrePage() {
+function TheatrePage({ videos, video, handleVideoListItemClick }) {
   return (
-    <div>
-      <h1>Player and list goes here</h1>
-      <hr />
-      <VideoList />
-      <VideoPlayer />
-    </div>
+    <Grid container direction="row" alignItems="flex-start" justifyContent="space-evenly">
+      <Grid item xs={12} sm={8}>
+        <VideoPlayer video={video} />
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <VideoList videos={videos} handleVideoListItemClick={handleVideoListItemClick} />
+      </Grid>
+    </Grid>
   );
 }
 
