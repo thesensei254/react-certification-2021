@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { trackPromise } from 'react-promise-tracker';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import searchYouTube from '../../lib/youTubeRequest';
 import Header from '../../components/Header';
 import CardItem from '../../components/CardItem';
 import TheatrePage from '../Theatre/Theatre.page';
@@ -24,17 +26,17 @@ const useStyles = makeStyles({
 function LandingPage() {
   const classes = useStyles();
   const [state, setState] = useState({
-    videos: exampleVideoData.items,
-    video: exampleVideoData.items[0],
+    videos: [],
+    video: {},
     isClicked: false,
   });
 
-  const handleCardClick = () => {
+  const handleCardClick = (clickedVideo) => {
     // Set is clicked to trigger re-render with the clicked video
     setState({
       isClicked: true,
-      videos: exampleVideoData.items,
-      video: exampleVideoData.items[1],
+      video: clickedVideo,
+      videos,
     });
   };
 
@@ -43,9 +45,23 @@ function LandingPage() {
     setState({
       video: currentVideo,
       isClicked: true,
-      videos,
+      videos: currentVideo,
     });
   };
+
+  const getYouTubeVideos = (query) => {
+    return searchYouTube(query, (items) => {
+      setState({
+        isClicked: false,
+        videos: items,
+        video: items[0],
+      });
+    });
+  };
+
+  useEffect(() => {
+    trackPromise(getYouTubeVideos('Wizeline'));
+  }, []);
 
   const { videos, video, isClicked } = state;
 
@@ -56,13 +72,6 @@ function LandingPage() {
         Wizeline React Bootcamp
       </Typography>
       <Wrapper>
-        {isClicked === true && (
-          <TheatrePage
-            videos={videos}
-            video={video}
-            handleVideoListItemClick={handleVideoListItemClick}
-          />
-        )}
         {isClicked === false && (
           <Grid
             container
@@ -83,6 +92,13 @@ function LandingPage() {
               </Grid>
             ))}
           </Grid>
+        )}
+        {isClicked === true && (
+          <TheatrePage
+            videos={videos}
+            video={video}
+            handleVideoListItemClick={handleVideoListItemClick}
+          />
         )}
       </Wrapper>
     </div>

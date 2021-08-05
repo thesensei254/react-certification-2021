@@ -20,11 +20,15 @@ const useStyles = makeStyles({
   },
 });
 
-function CardItem({ imageUrl, title, desc, handleCardClick }) {
+function CardItem({ video, imageUrl, title, desc, handleCardClick }) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={handleCardClick}>
+      <CardActionArea
+        onClick={() => {
+          handleCardClick(video);
+        }}
+      >
         <CardContent>
           <CardMedia className={classes.media} image={imageUrl} />
           <Typography gutterBottom variant="h5" component="h2">
