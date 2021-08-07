@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import _ from 'lodash';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -62,12 +63,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header() {
+function Header({ getYouTubeVideos }) {
   const classes = useStyles();
 
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     checked: true,
   });
+
+  const debouncedSearch = useCallback(_.debounce(getYouTubeVideos, 300), []);
+
+  const handleSearchInput = (q) => {
+    debouncedSearch(q);
+  };
 
   // TODO: Fix this function after learning about hooks state
   const handleSwitchChange = (e) => {
@@ -100,6 +107,7 @@ function Header() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => handleSearchInput(e.target.value)}
             />
           </div>
           <div className={classes.leftMenu}>

@@ -9,8 +9,6 @@ import Header from '../../components/Header';
 import CardItem from '../../components/CardItem';
 import TheatrePage from '../Theatre/Theatre.page';
 
-import exampleVideoData from '../../data/exampleVideoData';
-
 const Wrapper = styled.section`
   margin: 2em;
 `;
@@ -31,6 +29,8 @@ function LandingPage() {
     isClicked: false,
   });
 
+  const { videos, video, isClicked } = state;
+
   const handleCardClick = (clickedVideo) => {
     // Set is clicked to trigger re-render with the clicked video
     setState({
@@ -45,11 +45,12 @@ function LandingPage() {
     setState({
       video: currentVideo,
       isClicked: true,
-      videos: currentVideo,
+      videos,
     });
   };
 
   const getYouTubeVideos = (query) => {
+    console.log('Get Youtube videos firing!');
     return searchYouTube(query, (items) => {
       setState({
         isClicked: false,
@@ -60,14 +61,13 @@ function LandingPage() {
   };
 
   useEffect(() => {
+    // Get videos on load
     trackPromise(getYouTubeVideos('Wizeline'));
   }, []);
 
-  const { videos, video, isClicked } = state;
-
   return (
     <div>
-      <Header />
+      <Header getYouTubeVideos={getYouTubeVideos} />
       <Typography className={classes.heading} variant="h3" component="h1">
         Wizeline React Bootcamp
       </Typography>
